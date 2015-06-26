@@ -1,5 +1,13 @@
 /*! VelocityJS.org (1.2.2). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
 
+var _window;
+
+if (typeof window === 'undefined') {
+    _window = global;
+} else {
+    _window = window;
+}
+
 /*************************
    Velocity jQuery Shim
 *************************/
@@ -400,7 +408,7 @@
 
     /* Globalize Velocity onto the window, and assign its Utilities property. */
     window.Velocity = { Utilities: $ };
-})(window);
+})(_window);
 
 /******************
     Velocity.js
@@ -418,7 +426,11 @@
         factory();
     }
 }(function() {
-return function (global, window, document, undefined) {
+return function (global, window, undefined) {
+
+    if (typeof window.document === 'undefined') {
+        return;
+    }
 
     /***************
         Summary
@@ -3856,7 +3868,7 @@ return function (global, window, document, undefined) {
     });
 
     return Velocity;
-}((window.jQuery || window.Zepto || window), window, document);
+}((_window.jQuery || _window.Zepto || _window), _window);
 }));
 
 /******************
